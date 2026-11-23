@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Calm Forest theme. Values are RGB triplets so Tailwind can apply opacity. */
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: 247 245 240;
+  --card: 255 255 255;
+  --ink: 20 32 28;
+  --muted: 90 102 98;
+  --line: 227 222 211;
+  --track: 233 229 220;
+  --field: 251 250 247;
+  --primary: 24 122 94;
+  --primary-ink: 21 107 82;
+  --on-primary: 255 255 255;
+  --primary-soft: 227 241 236;
+  --amber: 224 150 31;
+  --amber-ink: 138 83 0;
+  --amber-soft: 252 240 218;
+  --coral: 232 111 92;
+  --coral-ink: 181 67 47;
+  --coral-soft: 251 231 227;
+  --shadow-card: 0 1px 2px rgb(20 32 28 / 0.05), 0 6px 20px rgb(20 32 28 / 0.05);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: 15 26 23;
+  --card: 23 37 33;
+  --ink: 238 243 240;
+  --muted: 163 178 172;
+  --line: 42 61 54;
+  --track: 36 53 47;
+  --field: 28 45 40;
+  --primary: 60 194 150;
+  --primary-ink: 95 211 172;
+  --on-primary: 11 21 18;
+  --primary-soft: 27 58 48;
+  --amber: 242 169 59;
+  --amber-ink: 245 190 99;
+  --amber-soft: 43 36 22;
+  --coral: 232 111 92;
+  --coral-ink: 240 154 139;
+  --coral-soft: 58 33 29;
+  --shadow-card: 0 0 0 1px rgb(42 61 54 / 0.6);
+}
+
+html,
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--ink));
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+body {
+  @apply font-sans;
+  min-height: 100dvh;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 3px solid rgb(var(--primary) / 0.55);
+  outline-offset: 2px;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+@layer components {
+  .pt-safe {
+    padding-top: max(env(safe-area-inset-top), 0px);
+  }
+  .pb-tabbar {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 96px);
+  }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.6); }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+.tick-pop { animation: pop 260ms cubic-bezier(0.3, 1.4, 0.5, 1); }
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.toast-in { animation: toast-in 180ms ease-out; }
+
+@keyframes sheet-up {
+  from { transform: translateY(24px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.sheet-up { animation: sheet-up 220ms cubic-bezier(0.2, 0.9, 0.3, 1); }
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.fade-in { animation: fade-in 200ms ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
